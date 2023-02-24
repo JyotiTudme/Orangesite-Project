@@ -1,6 +1,7 @@
 package project;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -9,15 +10,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class maintainance {
-	public static void main(String[] args) throws IOException, InterruptedException {
+public class maintaincewrongpassdenied {
+	@Test public void login() throws IOException {
+	
+	//public static void main(String[] args) throws IOException, InterruptedException {
+		
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver=new ChromeDriver();
 		Properties prop = new Properties();
-		FileInputStream ip= new FileInputStream("C:\\Users\\shubh\\eclipse-workspace\\Exclerselenium\\src\\test\\java\\project\\maintainance");
+		FileInputStream ip= new FileInputStream("C:\\Users\\shubh\\eclipse-workspace\\Exclerselenium\\src\\test\\java\\project\\maintainancewrongpass");
 		 prop.load(ip);
 	       driver.get(prop.getProperty("url"));
 	       driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -29,15 +34,17 @@ public class maintainance {
 	       login.click();
 	       WebElement maintain=driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[10]/a/span"));
 	       maintain.click();
-	       String winHandleBefore = driver.getWindowHandle();
-	        for(String winHandle : driver.getWindowHandles()){
-	            driver.switchTo().window(winHandle);
-	        }
-	       Thread.sleep(1000);
 	       
+	       //Thread.sleep(1000);
+	      
 	       WebElement pass=driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/form/div[3]/div/div[2]/input"));
-	       pass.sendKeys(prop.getProperty("pass"));
+	       pass.sendKeys(prop.getProperty("passkey"));
 	       WebElement confirm=driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/form/div[4]/button[2]"));
 	       confirm.click();
+	       driver.close();
+	       
 }
 }
+
+
+
